@@ -1,6 +1,6 @@
-# config.py
+# C:\xampp\miapp\config.py
 
-general_folder_path = r'C:\xampp\login\imagensubida'
+general_folder_path = r'C:\xampp\miapp\imagensubida'
 UPLOAD_FOLDER = general_folder_path
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 

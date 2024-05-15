@@ -1,0 +1,16 @@
+<!-- templates/interno/confirmar_rechazo.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Rechazo</title>
+</head>
+<body>
+    <h1>Confirmar Rechazo del Formulario</h1>
+    <p>¿Estás seguro de que deseas rechazar el formulario de {{ formulario.nombres }} {{ formulario.apellidos }}?</p>
+    <form method="POST" action="{{ url_for('interno.rechazar_formulario', id=formulario.id) }}">
+        <button type="submit">Sí, Rechazar</button>
+    </form>
+    <a href="{{ url_for('interno.ver_formulario', id=formulario.id) }}">No, Volver</a>
+</body>
+</html>

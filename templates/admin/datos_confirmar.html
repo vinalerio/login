@@ -1,0 +1,37 @@
+<!-- confirmacion_interna.html 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmación interna</title>
+</head>
+<body>
+    <h1>Confirmación interna</h1>
+
+    <form method="POST" action="{{ url_for('admin.confirmar_datos') }}">
+        <label for="nombres">Nombres:</label>
+        <input type="text" id="nombres" name="nombres" value="{{ session['datos_formulario']['nombres'] }}" required><br>
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" value="{{ session['datos_formulario']['apellidos'] }}" required><br>
+        <label for="cedula">Cédula:</label>
+        <input type="text" id="cedula" name="cedula" value="{{ session['datos_formulario']['cedula'] }}" required><br>
+        <label for="fnacimiento">Fecha de Nacimiento:</label>
+        <input type="date" id="fnacimiento" name="fnacimiento" value="{{ session['datos_formulario']['fnacimiento'] }}" required><br>
+        <button type="submit">Enviar correo de confirmación</button>
+    </form>
+
+    <script>
+        function enviarCorreoConfirmacion() {
+            fetch('/enviar_correo_confirmacion', {
+                method: 'POST'
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error al enviar el correo electrónico'));
+        }
+    </script>
+</body>
+</html>
+-->

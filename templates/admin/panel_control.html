@@ -1,0 +1,63 @@
+<!-- templates/interno/panel_control.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Formularios</title>
+</head>
+<body>
+    <h1>Formularios Pendientes </h1>
+    <table>
+        {% for formulario in formularios_pendientes %}
+        <tr>
+            <td>{{ formulario.id }}</td>
+            <td>{{ formulario.nombres }}</td>
+            <td>{{ formulario.apellidos }}</td>
+            <td>{{ formulario.cedula }}</td>
+            <td>{{ formulario.fnacimiento }}</td>
+            <td>{{ formulario.correo }}</td>
+            <td>
+                <a href="{{ url_for('interno.ver_formulario', datos_id=formulario.id) }}">Ver</a>
+                <a href="{{ url_for('interno.aprobar_formulario', datos_id=formulario.id) }}">Aprobar</a>
+        </td>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Formularios Rechazados</h1>
+    <table>
+        {% for formulario in formularios_rechazados %}
+        <tr>
+            <td>{{ formulario.id }}</td>
+            <td>{{ formulario.nombres }}</td>
+            <td>{{ formulario.apellidos }}</td>
+            <td>{{ formulario.cedula }}</td>
+            <td>{{ formulario.fnacimiento }}</td>
+            <td>{{ formulario.correo }}</td>
+            <td>
+                <a href="{{ url_for('interno.ver_formulario', datos_id=formulario.id) }}">Ver</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Formularios Aprobados</h1>
+    <table>
+        {% for formulario in formularios_aprobados %}
+        <tr>
+            <td>{{ formulario.id }}</td>
+            <td>{{ formulario.nombres }}</td>
+            <td>{{ formulario.apellidos }}</td>
+            <td>{{ formulario.cedula }}</td>
+            <td>{{ formulario.fnacimiento }}</td>
+            <td>{{ formulario.correo }}</td>
+            <td>
+                <a href="{{ url_for('interno.ver_formulario', datos_id=formulario.id) }}">Ver</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

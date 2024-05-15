@@ -1,6 +1,6 @@
+#C:\xampp\miapp\confBD.py
 import mysql.connector
 from flask import Flask
-from flask_mysqldb import MySQL
 
 def conectionBD():
     conexion = mysql.connector.connect(
@@ -14,3 +14,4 @@ def conectionBD():
     else:
          print("Conexión fallida")
     return conexion
+

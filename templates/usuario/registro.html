@@ -1,0 +1,274 @@
+<!-- templates/externo/registro.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+  <style>
+    /* Ajustes personalizados para dispositivos móviles */
+    body {
+      background-image: url("{{ url_for('static', filename='img/copaco-aregua.png') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: row;
+      }
+    }
+
+    .container {
+      display: flex;
+      grid-template-columns: repeat(3, 1fr);
+      color: white;
+    }
+
+    .image-box {
+      border: 1px solid #ced4da;
+      padding: 10px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .error-message {
+      color: red;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .error-message ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .error-message ul li::before {
+      content: "⚠️ ";
+
+    }
+
+    label {
+      text-align: left;
+      display: block;
+      margin-bottom: 5px;
+      color: white;
+    }
+
+    h1 {
+      font-family: Courier, monospace;
+    }
+  </style>  
+</head>
+
+<body>
+  <form id="RegistroForm" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="container">
+      <div class="align-self-center">
+        <h1>¡Bienvenido!</h1>
+        <!-- Campo para el número de cédula -->
+        <div class="form-group">
+          {{ form.cedula.label }}
+          {{ form.cedula(class="form-control", placeholder="1234567", type="number") }}
+          {% if form.cedula.errors %}
+          <ul class="errors">
+            {% for error in form.cedula.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <!-- Campo para los nombres -->
+        <div class="form-group">
+          {{ form.nombres.label }}
+          {{ form.nombres(class="form-control", placeholder="Juan Ramón", id="nombres") }}
+          {% if form.nombres.errors %}
+          <ul class="errors">
+            {% for error in form.nombres.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+
+        <script>
+          document.getElementById('nombres').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+          });
+        </script>
+        <!-- Campo para los apellidos -->
+        <div class="form-group">
+          {{ form.apellidos.label }}
+          {{ form.apellidos(class="form-control", placeholder="Perez Acosta", id="apellidos") }}
+          {% if form.apellidos.errors %}
+          <ul class="errors">
+            {% for error in form.apellidos.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+
+        <script>
+          document.getElementById('apellidos').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+          });
+        </script>
+        
+        <!-- Campo para la fecha de nacimiento -->
+        <div class="form-group">
+          {{ form.fnacimiento.label }}
+          {{ form.fnacimiento(class="form-control", placeholder="04/07/1992", type="date") }}
+          {% if form.fnacimiento.errors %}
+          <ul class="errors">
+            {% for error in form.fnacimiento.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <!-- Campo para el correo -->
+        <div class="form-group">
+          {{ form.correo.label }}
+          {{ form.correo(class="form-control", placeholder="Correo Electrónico") }}
+          {% if form.correo.errors %}
+          <ul class="errors">
+            {% for error in form.correo.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <!-- Campo para repetir el correo -->
+        <div class="form-group">
+          {{ form.correo2.label }}
+          {{ form.correo2(class="form-control", placeholder="Repetir Correo") }}
+          {% if form.correo2.errors %}
+          <ul class="errors">
+            {% for error in form.correo2.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <!-- Campo para el número de teléfono -->
+        <div class="form-group">
+          {{ form.telefono.label }}
+          {{ form.telefono(class="form-control", placeholder="0961234567", type="tel", id="telefono") }}
+          {% if form.telefono.errors %}
+          <ul class="errors">
+            {% for error in form.telefono.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        <script>
+          document.getElementById('telefono').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+          });
+        </script>
+        <!-- Campos para la carga de documentos -->
+        <div class="form-group">
+          <div class="image-box">
+            {{ form.cedula_adelante.label }}
+            {{ form.cedula_adelante(class="form-control-file") }}
+            {% if form.cedula_adelante.errors %}
+            <ul class="errors">
+              {% for error in form.cedula_adelante.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {{ form.cedula_atras.label }}
+            {{ form.cedula_atras(class="form-control-file") }}
+            {% if form.cedula_atras.errors %}
+            <ul class="errors">
+              {% for error in form.cedula_atras.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+            {{ form.selfie.label }}
+            {{ form.selfie(class="form-control-file") }}
+            {% if form.selfie.errors %}
+            <ul class="errors">
+              {% for error in form.selfie.errors %}
+              <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form.submit(class="btn btn-outline-light d-block mx-auto mt-3") }}
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  <script>
+    $(document).ready(function() {
+      $('#RegistroForm').submit(function(event) {
+        event.preventDefault(); // Evitar el envío del formulario
+        var formData = new FormData(this); // Crear un objeto FormData con los datos del formulario
+    
+        $.ajax({
+          url: '{{ url_for("user.registro_exitoso") }}',
+          type: 'POST',
+          data: formData,
+          contentType: false, // Especificar que no estamos enviando datos de tipo 'application/x-www-form-urlencoded'
+          processData: false, // Especificar que no estamos procesando los datos como un string
+          dataType: 'json',
+          success: function(response) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro exitoso',
+              text: response.mensaje
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = '{{ url_for("user.home") }}'; // Redirigir después de cerrar el cuadro de diálogo
+              }
+            });
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.error('Error:', textStatus, errorThrown);
+            console.error('Response:', jqXHR.responseText);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Ha ocurrido un error al procesar el registro: ' + textStatus
+            });
+            console.log('Server response:', jqXHR.responseText); // Agregar esta línea para imprimir la respuesta del servidor
+          }
+        });
+      });
+    });
+    </script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+</html>

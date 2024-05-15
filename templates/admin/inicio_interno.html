@@ -1,0 +1,155 @@
+<!-- c:/xampp/miapp/templates/admin/inicio_interno.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+ 
+  <!-- Agrega la biblioteca Bootstrap para estilos y componentes CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ <style>
+    body {
+      background-image: url("{{ url_for('static', filename='img/copaco-aregua.png') }}");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      align-items: center;  
+      justify-content: center;
+    }
+    .table {
+      background-color: #f8f9fa; /* Color azul claro */
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar-nav {
+        flex-direction: row;
+      }
+
+      .nav-item {
+        margin-right: 10px;
+      }
+
+      .nav-greeting {
+        display: none;
+      }
+
+      .form-inline {
+        margin-bottom: 10px;
+      }
+
+      .table {
+        font-size: 14px;
+        background-color: #e9ecef; /* Color azul claro para pantallas pequeñas */
+
+      }
+
+      .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      .table-responsive {
+        border: none;
+      }
+
+      .table thead {
+        display: none;
+      }
+
+      .table tbody tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+      }
+
+      .table tbody td {
+        display: block;
+        text-align: right;
+        padding: 0.5rem;
+      }
+
+      .table tbody td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+      }
+    }
+    .formulario {
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">  </a>   <!-- agregar menu si se quiere -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <!-- Ícono de globo terráqueo -->
+        <a class="nav-link" href="#"><span class="glyphicon glyphicon-globe"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Inicio</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Formularios
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{url_for('admin.formularios_pendientes')}}">Pendientes</a>
+          <a class="dropdown-item" href="{{url_for('admin.formularios_aprobados')}}">Aprobados</a>
+          <a class="dropdown-item" href="{{url_for('admin.formularios_rechazados')}}">Rechazados</a>
+
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{{url_for('admin.formularios_todos')}}">Todos</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Acerca de</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Contacto</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <p class="nav-greeting">Hola, {{ datos.nombres }} {{ datos.apellidos }}!</p>
+        </a>
+      </li>
+    </ul>
+      <!-- Formulario de búsqueda -->
+    <form class="form-inline my-2 my-lg-0 mr-3">
+      <input class="form-control mr-sm-2" type="buscar" placeholder="Buscar" aria-label="Buscar">
+      <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+    
+    <!-- Mover el enlace "Cerrar Sesión" hacia la derecha -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('admin.cerrar_sesion') }}">Cerrar Sesión</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="content-container">
+  {% block content %}{% endblock %}
+</div>
+
+<!-- Agrega la biblioteca jQuery y los scripts de Bootstrap para funcionalidades -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

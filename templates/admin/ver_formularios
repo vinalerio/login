@@ -1,0 +1,18 @@
+<!-- templates/interno/ver_formulario.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Formulario</title>
+</head>
+<body>
+    <h1>Detalles del Formulario</h1>
+    <p>Nombres: {{ formulario.nombres }}</p>
+    <p>Apellidos: {{ formulario.apellidos }}</p>
+    <p>Cédula: {{ formulario.cedula }}</p>
+    <p>Fecha de Nacimiento: {{ formulario.fnacimiento }}</p>
+    <p>Correo: {{ formulario.correo }}</p>
+    <!-- Añade aquí más detalles según sea necesario -->
+    <a href="{{ url_for('interno.listar_formularios', estado=formulario.estado) }}">Volver a la lista de formularios {{ formulario.estado }}</a>
+</body>
+</html>
